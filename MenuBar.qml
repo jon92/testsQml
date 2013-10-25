@@ -2,8 +2,8 @@ import QtQuick 2.0
 
 Rectangle {
    id:menuBar
-   height: 600
-   width: 800
+   height: 70
+   width: parent.width
    color: "#14171c"
 
        Rectangle{
