@@ -18,7 +18,11 @@ Rectangle {
                Button{
                    id: fileButton
                    y: 5
-                   onButtonClick: menuListView.currentIndex = 0
+                   onButtonClick: {
+                       menuListView.currentIndex = 0
+                       editButton.buttonColor = "#0b2135"
+                       buttonColor = "#123556"
+                   }
                    buttonColor: "#123556"
                    Text {
                           anchors.centerIn: parent
@@ -29,7 +33,11 @@ Rectangle {
                Button{
                    id: editButton
                    y: 5
-                   onButtonClick:    menuListView.currentIndex = 1
+                   onButtonClick: {
+                       menuListView.currentIndex = 1
+                       fileButton.buttonColor = "#0b2135"
+                       buttonColor = "#123556"
+                   }
                    buttonColor: "#0b2135"
                    Text {
                           anchors.centerIn: parent
