@@ -17,4 +17,12 @@ Rectangle{
         anchors.top: menuBar.bottom
         anchors.horizontalCenter: mainScreen.horizontalCenter
     }
+
+    Params{
+        id: params
+        z:2
+        width: 800
+        height: 30
+        anchors.bottom: parent.bottom
+    }
 }

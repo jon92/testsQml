@@ -11,6 +11,5 @@ Rectangle{
         width : 600
         height : parent.height -100
         wrapMode: TextEdit.Wrap
-        onCursorRectangleChanged: flickArea.ensureVisible(cursorRectangle)
     }
 }
