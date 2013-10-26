@@ -5,6 +5,8 @@ Rectangle {
     id: params
     color: "#123556"
     opacity: 0.5
+    width: 800
+    height: 30
 
     MouseArea{
         id : mouseArea
@@ -21,6 +23,7 @@ Rectangle {
             spacing : -10
             CheckBox{
                 id: checkbox
+                checked: true
             }
             Text{
                 text: checkbox.checked ? "Checked" : "Unchecked"
@@ -33,14 +36,21 @@ Rectangle {
             spacing : -10
             CheckBox{
                 id: checkbox2
-                checked: true
             }
             Text{
-                text: checkbox2.checked ? "Checked" : "Unchecked"
+                text: checkbox2.checked ? "Menu maximized" : "Maximize this menu"
                 anchors.verticalCenter: checkbox2.verticalCenter
                 color: "white"
                 opacity: 1
             }
         }
+    }
+
+    states: State {
+           name: "maximized"; when: checkbox2.checked
+           PropertyChanges { target: params; height:50 }
+    }
+    transitions: Transition {
+             NumberAnimation { properties: "height"; easing.type: Easing.InOutQuad }
     }
 }
