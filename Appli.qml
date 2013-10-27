@@ -14,6 +14,7 @@ Rectangle{
 
     TextArea {
         id: textArea
+        width : paramModule.valeur
         anchors.top: menuBar.bottom
         anchors.horizontalCenter: mainScreen.horizontalCenter
     }
@@ -23,5 +24,12 @@ Rectangle{
         z:2
         width: mainScreen.width
         anchors.bottom: parent.bottom
+    }
+    ParamModule{
+        id:paramModule
+        width: 200
+        height: 300
+        anchors.right: parent.right
+        y : 150
     }
 }
