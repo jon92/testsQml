@@ -33,12 +33,12 @@ Rectangle {
                Button{
                    id: editButton
                    y: 5
+                   buttonColor: "#0b2135"
                    onButtonClick: {
                        menuListView.currentIndex = 1
                        fileButton.buttonColor = "#0b2135"
                        buttonColor = "#123556"
                    }
-                   buttonColor: "#0b2135"
                    Text {
                           anchors.centerIn: parent
                           text: "Edit"
@@ -87,5 +87,23 @@ Rectangle {
                     highlightMoveDuration:240
                     highlightRangeMode: ListView.StrictlyEnforceRange
            }
+        }
+
+        Item{
+            focus: true
+            Keys.onPressed: {
+                if (event.key == Qt.Key_Right) {
+                    fileButton.buttonColor = "#0b2135"
+                    editButton.buttonColor = "#123556"
+                    menuListView.currentIndex = 1
+                    event.accepted = true;
+                }
+                if (event.key == Qt.Key_Left) {
+                    editButton.buttonColor = "#0b2135"
+                    fileButton.buttonColor = "#123556"
+                    menuListView.currentIndex = 0
+                    event.accepted = true;
+                }
+            }
         }
 }
