@@ -23,6 +23,30 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.horizontalCenter
+
+        onPaint: {
+            //récupère le contexte de dessin
+            var contxt = canvas.getContext('2d')
+            contxt.clearRect(0,0,width,height)
+
+            var centerX = width/2
+            var centerY = height/2
+            var radius = 0.9 * Math.min(width, height)/2 //Le centre du graphique
+            var startAngle = 0.0
+            var endAngle = 0.0
+            for (var index = 0; index < model.count; index++) {
+                startAngle = endAngle
+                endAngle = startAngle + model.get(index).value*2*Math.PI/360 //pr mettre en radians
+                contxt.fillStyle = model.get(index).color
+                // draw the piece
+                contxt.beginPath()
+                contxt.moveTo(centerX, centerY)
+                contxt.arc(centerX, centerY, radius, startAngle, endAngle, false)
+                contxt.lineTo(centerX, centerY) //Fermeture de l'arc
+                contxt.fill()
+                contxt.stroke()
+            }
+        }
     }
 
     ListView{
