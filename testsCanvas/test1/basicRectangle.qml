@@ -20,7 +20,6 @@ Rectangle {
             contxt.rect(50,50,200,200)
             contxt.fillStyle = "#FFF0A5"
             contxt.fill()
-
             contxt.lineWidth =  4
             contxt.strokeStyle = "#ff8966"
             contxt.stroke()
