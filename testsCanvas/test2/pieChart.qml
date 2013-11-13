@@ -24,6 +24,10 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.horizontalCenter
 
+        Behavior on rotation{
+            SpringAnimation {spring: 1; damping: 0.2}
+        }
+
         onPaint: {
             //récupère le contexte de dessin
             var contxt = canvas.getContext('2d')
@@ -34,10 +38,18 @@ Rectangle {
             var radius = 0.9 * Math.min(width, height)/2 //Le centre du graphique
             var startAngle = 0.0
             var endAngle = 0.0
-            for (var index = 0; index < model.count; index++) {
+            for (var index2 = 0; index2 < model.count; index2++) {
                 startAngle = endAngle
-                endAngle = startAngle + model.get(index).value*2*Math.PI/360 //pr mettre en radians
-                contxt.fillStyle = model.get(index).color
+                endAngle = startAngle + model.get(index2).value*2*Math.PI/360 //pr mettre en radians
+
+                if (index2 == view.currentIndex){
+                    radius *= 1.02
+                    canvas.rotation = - 180 / Math.PI *(startAngle + (endAngle - startAngle) /2)
+                }else{
+                    radius*= 1.0
+                }
+
+                contxt.fillStyle = model.get(index2).color
                 // draw the piece
                 contxt.beginPath()
                 contxt.moveTo(centerX, centerY)
@@ -51,6 +63,7 @@ Rectangle {
 
     ListView{
         id:view
+        z:1
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         anchors.left: parent.horizontalCenter
@@ -83,6 +96,33 @@ Rectangle {
                 text: model.value
                 color: "#1C1C1C"
             }
+            MouseArea{
+                anchors.fill: parent
+                onClicked:{
+                    view.currentIndex = index
+                }
+            }
+        }
+
+        highlight : Item{
+            z: 10
+            width: view.currentItem.width
+            height: view.currentItem.height
+            Rectangle{
+                anchors.fill: parent
+                anchors.margins: 1
+                radius: 2
+                color: "transparent"
+                border.width: 3
+                border.color: Qt.lighter(model.get(view.currentIndex).color)
+                Behavior on border.color{
+                    PropertyAnimation {}
+                }
+            }
+        }
+
+        onCurrentIndexChanged: {
+            canvas.requestPaint()
         }
     }
 }
