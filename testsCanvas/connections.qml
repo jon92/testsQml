@@ -5,8 +5,10 @@ Rectangle {
     height: 400
     QtObject {
         id: m
-        property int mousePositionX: 120
-        property int mousePositionY: 210
+        property int startX: 120
+        property int startY: 210
+        property int endX: 120
+        property int endY: 210
     }
     Rectangle{
         id: redNode
@@ -36,8 +38,8 @@ Rectangle {
 
             // Crée une ligne entre les deux rectangles
             contxt.beginPath()
-            contxt.moveTo(m.mousePositionX,  m.mousePositionY);
-            contxt.lineTo(blueNode.x,blueNode.y + blueNode.height/2);
+            contxt.moveTo(m.startX,  m.startY);
+            contxt.lineTo(m.endX,m.endY);
             contxt.lineWidth =  4;
             contxt.strokeStyle = "#ff8966";
             contxt.stroke();
@@ -45,11 +47,17 @@ Rectangle {
 
         MouseArea{
             anchors.fill: parent
-            onPressed: {
+            hoverEnabled: true
+            onPositionChanged: {
+                m.endX = mouseX
+                m.endY = mouseY
                 console.debug(mouseX)
                 console.debug(mouseY)
-                m.mousePositionX = mouseX
-                m.mousePositionY = mouseY
+                canvas.requestPaint()
+            }
+            onPressed: {
+                m.startX = mouseX
+                m.startY = mouseY
                 canvas.requestPaint()
             }
         }
