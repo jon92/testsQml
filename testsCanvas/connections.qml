@@ -18,7 +18,31 @@ Rectangle {
         x: 50
         color:"red"
         anchors.top : parent.verticalCenter
+        Rectangle{
+            id: redOutput
+            anchors.left: parent.right
+            anchors.leftMargin: -3
+            anchors.verticalCenter: parent.verticalCenter
+            width: 8
+            height: 8
+            border.width: 2
+            border.color: "blue"
+            radius: width*0.5
+            color: "blue"
+        }
+        MouseArea{
+            id: output
+            anchors.fill : parent
+            anchors.top : parent.top
+            anchors.left: parent.left
+            hoverEnabled: true
+            onClicked: {
+                console.debug(mouseX)
+                console.debug(mouseY)
+            }
+        }
     }
+
     Rectangle{
         id: blueNode
         width: 70
@@ -47,6 +71,7 @@ Rectangle {
         }
 
         MouseArea{
+            id: connection
             anchors.fill: parent
             hoverEnabled: true
             onPositionChanged: {
