@@ -1,8 +1,8 @@
 import QtQuick 2.0
 
 Rectangle {
-    width: 150
-    height: 400
+    width: 450
+    height: 600
 
     Canvas{
         id:canvas
@@ -31,6 +31,16 @@ Rectangle {
             contxt.arcTo(5, 205, 5, 200, 5)
             contxt.lineTo(5,155)
             contxt.arcTo(5, 150, 10, 150, 5)
+
+            //Arc
+            contxt.moveTo(10, 250)
+            contxt.arc(30,280, 3.14, 0, 100, true)
+
+            //courbe de béziers
+            contxt.lineWidth="3";
+            contxt.strokeStyle="black";
+            contxt.moveTo(10,400);
+            contxt.bezierCurveTo(100,100,100,300,300,300);
 
             contxt.fill()
             contxt.stroke()
