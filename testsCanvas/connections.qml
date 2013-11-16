@@ -9,6 +9,7 @@ Rectangle {
         property int startY: 210
         property int endX: 120
         property int endY: 210
+        property int state: 0
     }
     Rectangle{
         id: redNode
@@ -49,15 +50,26 @@ Rectangle {
             anchors.fill: parent
             hoverEnabled: true
             onPositionChanged: {
-                m.endX = mouseX
-                m.endY = mouseY
-                console.debug(mouseX)
-                console.debug(mouseY)
-                canvas.requestPaint()
+                if(m.state == 1){
+                    m.endX = mouseX
+                    m.endY = mouseY
+                    console.debug(mouseX)
+                    console.debug(mouseY)
+                    canvas.requestPaint()
+                }
             }
             onPressed: {
+                m.state = 1
                 m.startX = mouseX
                 m.startY = mouseY
+                m.endX = m.startX
+                m.endY = m.startY
+                canvas.requestPaint()
+            }
+            onReleased: {
+                m.state = 0
+                m.endX = m.startX
+                m.endY = m.startY
                 canvas.requestPaint()
             }
         }
